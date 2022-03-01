@@ -19,6 +19,7 @@ from rest_framework_nested import routers
 
 from customer.views import SignUpViewSet
 from staff.views import SignUpStaffViewSet
+from contract.views import SignUpContractViewSet
 
 router = routers.SimpleRouter()
 router.register('signup', SignUpViewSet, basename='signup')
@@ -26,9 +27,14 @@ router.register('signup', SignUpViewSet, basename='signup')
 router_staff = routers.SimpleRouter()
 router_staff.register('staff', SignUpStaffViewSet, basename='signup_staff')
 
+router_contract = routers.SimpleRouter()
+router_contract.register('contract', SignUpContractViewSet, basename='signup_contract')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('rest_framework.urls')),
     path('', include(router.urls)),
     path('', include(router_staff.urls)),
+    path('', include(router_contract.urls)),
+
 ]
