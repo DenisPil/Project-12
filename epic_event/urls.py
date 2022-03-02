@@ -21,14 +21,14 @@ from customer.views import SignUpViewSet
 from staff.views import SignUpStaffViewSet
 from contract.views import SignUpContractViewSet
 
-router = routers.SimpleRouter()
-router.register('signup', SignUpViewSet, basename='signup')
+router_customer = routers.SimpleRouter()
+router_customer.register('customer', SignUpViewSet, basename='customer')
 
 router_staff = routers.SimpleRouter()
-router_staff.register('staff', SignUpStaffViewSet, basename='signup_staff')
+router_staff.register('staff', SignUpStaffViewSet, basename='staff')
 
 router_contract = routers.SimpleRouter()
-router_contract.register('contract', SignUpContractViewSet, basename='signup_contract')
+router_contract.register('contract', SignUpContractViewSet, basename='contract')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

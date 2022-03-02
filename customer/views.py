@@ -11,6 +11,13 @@ class SignUpViewSet(ModelViewSet):
 
     serializer_class = SignupSerializer
     
+    def get_queryset(self, *args, **kwargs):
+        queryset = Customer.objects.all()
+        """if "pk" in self.kwargs:
+            return Customer.objects.filter(pk=self.kwargs['pk'])
+        queryset = Customer.objects.filter(Q(creator_id=self.request.user.id))"""
+        return queryset
+    
     def create(self, request):
         serializer = SignupSerializer(data=request.data)
         data = {}
