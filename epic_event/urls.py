@@ -33,7 +33,7 @@ router_contract.register('contract', SignUpContractViewSet, basename='contract')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('rest_framework.urls')),
-    path('', include(router.urls)),
+    path('', include(router_customer.urls)),
     path('', include(router_staff.urls)),
     path('', include(router_contract.urls)),
 
