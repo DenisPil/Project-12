@@ -6,4 +6,28 @@ from .models import Event
 class CreateEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['contract_event', 'event_date', 'number_guests', 'event_status','commentary', 'support_contact' ]
+        fields = ['contract_event',
+                  'event_date',
+                  'number_guests',
+                  'commentary',
+                  'support_contact' ]
+
+
+class EventDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ['contract_event',
+                  'event_date',
+                  'number_guests',
+                  'commentary',
+                  'support_contact' ]
+
+
+class EventListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ['contract_event',
+                  'event_date',
+                  'number_guests',
+                  'commentary',
+                  'support_contact' ]

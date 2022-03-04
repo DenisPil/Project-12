@@ -2,7 +2,28 @@ from rest_framework import serializers
 from .models import Staff
 
 
-class SignupSerializer(serializers.ModelSerializer):
+class StaffSignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staff
-        fields = ['first_name', 'last_name','role']
+        fields = ['username',
+                  'password',
+                  'email',
+                  'role',
+                 ]
+
+class StaffDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Staff
+        fields = ['username',
+                  'email',
+                  'role',
+                 ]
+
+class StaffListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Staff
+        fields = ['id',
+                  'username',
+                  'email',
+                  'role'
+                ]

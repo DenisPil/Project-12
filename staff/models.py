@@ -9,4 +9,3 @@ class Role(models.TextChoices):
     
 class Staff(AbstractUser):
     role = models.CharField(max_length=28, choices=Role.choices, verbose_name='role')
-
