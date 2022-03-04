@@ -3,8 +3,11 @@ from .serializers import CustomerListSerializer, CustomerDetailSerializer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
+
+from .permissions import IsStaff, IsSallesContact, IsSupportContact
 from .models import Customer
 from staff.models import Staff
+
 
 class MultipleSerializerMixin:
     
@@ -24,10 +27,10 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
+    permissions_classes = [IsStaff | IsSallesContact]
     
     def get_queryset(self, *args, **kwargs):
         queryset = Customer.objects.all()
-        print(kwargs,args,"________________________________")
         """if "pk" in self.kwargs:
             return Customer.objects.filter(pk=self.kwargs['pk'])
         queryset = Customer.objects.filter(Q(creator_id=self.request.user.id))"""

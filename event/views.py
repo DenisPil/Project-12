@@ -6,6 +6,7 @@ from .serializers import CreateEventSerializer, EventListSerializer, EventDetail
 from .models import Event
 from staff.models import Staff
 
+
 class MultipleSerializerMixin:
     
     """ Mixin permet d'afficher les vues en détail ou en liste"""

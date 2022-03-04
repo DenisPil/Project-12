@@ -5,7 +5,7 @@ from rest_framework import status
 
 from .serializers import CreateContractSerializer, ContractDetailSerializer, ContractListSerializer
 from .models import Contract
-
+from staff.models import Staff
 
 class MultipleSerializerMixin:
     
@@ -36,13 +36,17 @@ class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
     
     def create(self, request):
         serializer = CreateContractSerializer(data=request.data)
-        print(request.data,'-----------------------')
         data = {}
-        if serializer.is_valid(request):
-            serializer.save()
-            data['response'] = "Successfully registered a new user"
-
-        return Response(data, status=status.HTTP_201_CREATED) 
+        print(request.data['sales_contact'],'-----------------------')
+        valid_staff = Staff.objects.get(pk=request.data['sales_contact'])
+        if valid_staff.role != 'sales team':
+            data['response'] = "Staff is not from sales team"
+            return Response(data, status=status.HTTP_406_NOT_ACCEPTABLE) 
+        else:
+            if serializer.is_valid(request):
+                serializer.save()
+                data['response'] = "Successfully registered a new contract"
+            return Response(data, status=status.HTTP_201_CREATED) 
 
 
     def update(self, request, *args, **kwargs):

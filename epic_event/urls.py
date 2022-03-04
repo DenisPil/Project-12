@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_nested import routers
 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from customer.views import CustomerViewSet
 from staff.views import StaffViewSet
 from contract.views import ContractViewSet
@@ -38,6 +39,7 @@ router_event.register(r'event/?', EventViewSet, basename='event')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('rest_framework.urls')),
+    path('login/', TokenObtainPairView.as_view(), name='obtain_tokens'),
     path('', include(router_customer.urls)),
     path('', include(router_staff.urls)),
     path('', include(router_contract.urls)),
