@@ -16,7 +16,8 @@ class StaffSignupSerializer(serializers.ModelSerializer):
         
     def save(self):
         account = Staff(email=self.validated_data['email'],
-                       username=self.validated_data['username'],)
+                       username=self.validated_data['username'],
+                       role=self.validated_data['role'])
         password = self.validated_data['password']
         account.set_password(password)
         account.save()

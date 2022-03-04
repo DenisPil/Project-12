@@ -3,6 +3,8 @@ from .serializers import CustomerListSerializer, CustomerDetailSerializer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.decorators import login_required
 
 from .permissions import IsStaff, IsSallesContact, IsSupportContact
 from .models import Customer
@@ -14,7 +16,7 @@ class MultipleSerializerMixin:
     """ Mixin permet d'afficher les vues en détail ou en liste"""
 
     detail_serializer_class = None
-
+    
     def get_serializer_class(self):
         if self.action == 'retrieve' and self.detail_serializer_class is not None:
             return self.detail_serializer_class
@@ -27,8 +29,8 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
-    permissions_classes = [IsStaff | IsSallesContact]
-    
+    permission_classes = [IsStaff, IsAuthenticated]
+
     def get_queryset(self, *args, **kwargs):
         queryset = Customer.objects.all()
         """if "pk" in self.kwargs:

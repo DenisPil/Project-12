@@ -6,19 +6,19 @@ from staff.models import Staff
 
 
 
-STAFF_PERMS = ['GET']
+STAFF_PERMS = ['PUT']
 CONTACT_PERMS = ['PUT', 'DELETE', 'POST']
 
 
 class IsStaff(BasePermission):
 
-    print('mabite')
     def has_permission(self, request, view):
         customers = Customer.objects.get(id=view.kwargs['projects__pk'])
         print(customers,'55555555555555555555555555555555555')
-        if customers.creator.id == request.user.id:
-            if request.method in STAFF_PERMS:
-                return True
+        print(view)
+
+        if request.method in STAFF_PERMS:
+             return True
 
 
 class IsSallesContact(BasePermission):
@@ -27,7 +27,7 @@ class IsSallesContact(BasePermission):
         contributeurs_project = Staff.objects.filter(
             project_id__id=view.kwargs['projects__pk'])
         for contributor in contributeurs_project:
-            if contributor.contributor_id.id == request.user.id:
+            if contributor.contributor_id.id == request.staff.id:
                 if request.method in CONTACT_PERMS:
                     return True
 
