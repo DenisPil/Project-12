@@ -3,10 +3,8 @@ from .serializers import CustomerListSerializer, CustomerDetailSerializer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.decorators import login_required
 
-from .permissions import IsStaff, IsSalesContact, IsSupportContact
+from .permissions import IsStaff, IsSalesContact, IsManagementTeam
 from .models import Customer
 from staff.models import Staff
 
@@ -29,7 +27,7 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
-    permission_classes = [IsSalesContact | IsStaff]
+    permission_classes = [IsSalesContact | IsStaff | IsManagementTeam]
 
     def get_queryset(self, *args, **kwargs):
         queryset = Customer.objects.all()

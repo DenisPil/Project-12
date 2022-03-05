@@ -24,7 +24,6 @@ class IsStaff(BasePermission):
 class IsSalesContact(BasePermission):
 
     def has_permission(self, request, view):
-        print(view.kwargs,'-------4-------',request.user.role == 'sales team')
         if request.user.role == 'sales team':
             if request.method in CONTACT_PERMS:
                 if 'pk' in view.kwargs:
@@ -33,12 +32,10 @@ class IsSalesContact(BasePermission):
                         return True
 
 
-
-class IsSupportContact(BasePermission):
+class IsManagementTeam(BasePermission):
 
     def has_permission(self, request, view):
-        print(view.kwargs,'-------4-------',request.user.role == 'sales team')
-        if request.user.role == 'sales team':
+        if request.user.role == 'management team':
             if request.method in CONTACT_PERMS:
                 if 'pk' in view.kwargs:
                     customer = Customer.objects.get(id=view.kwargs['pk'])
