@@ -5,38 +5,42 @@ from .models import Customer
 from staff.models import Staff
 
 
-
-STAFF_PERMS = ['PUT']
-CONTACT_PERMS = ['PUT', 'DELETE', 'POST']
+NO_PERMS = []
+STAFF_PERMS = ['GET']
+CONTACT_PERMS = ['GET','PUT', 'DELETE', 'POST']
 
 
 class IsStaff(BasePermission):
 
     def has_permission(self, request, view):
-        customers = Customer.objects.get(id=view.kwargs['projects__pk'])
-        print(customers,'55555555555555555555555555555555555')
-        print(view)
+        if request.user.is_anonymous:
+            if request.method in NO_PERMS:
+                 return True
+        else:
+            if request.method in STAFF_PERMS:
+                 return True
 
-        if request.method in STAFF_PERMS:
-             return True
 
-
-class IsSallesContact(BasePermission):
+class IsSalesContact(BasePermission):
 
     def has_permission(self, request, view):
-        contributeurs_project = Staff.objects.filter(
-            project_id__id=view.kwargs['projects__pk'])
-        for contributor in contributeurs_project:
-            if contributor.contributor_id.id == request.staff.id:
-                if request.method in CONTACT_PERMS:
-                    return True
+        print(view.kwargs,'-------4-------',request.user.role == 'sales team')
+        if request.user.role == 'sales team':
+            if request.method in CONTACT_PERMS:
+                if 'pk' in view.kwargs:
+                    customer = Customer.objects.get(id=view.kwargs['pk'])
+                    if customer.sales_contact.id == request.user.id :
+                        return True
+
 
 
 class IsSupportContact(BasePermission):
 
     def has_permission(self, request, view):
-        if 'pk' in view.kwargs:
-            issue = Staff.objects.get(id=view.kwargs['pk'])
-            if issue.assignee_user_id.id == request.user.id:
-                if request.method in CONTACT_PERMS:
-                    return True
+        print(view.kwargs,'-------4-------',request.user.role == 'sales team')
+        if request.user.role == 'sales team':
+            if request.method in CONTACT_PERMS:
+                if 'pk' in view.kwargs:
+                    customer = Customer.objects.get(id=view.kwargs['pk'])
+                    if customer.sales_contact.id == request.user.id :
+                        return True

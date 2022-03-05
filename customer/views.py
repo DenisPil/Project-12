@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.decorators import login_required
 
-from .permissions import IsStaff, IsSallesContact, IsSupportContact
+from .permissions import IsStaff, IsSalesContact, IsSupportContact
 from .models import Customer
 from staff.models import Staff
 
@@ -29,7 +29,7 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
-    permission_classes = [IsStaff, IsAuthenticated]
+    permission_classes = [IsSalesContact | IsStaff]
 
     def get_queryset(self, *args, **kwargs):
         queryset = Customer.objects.all()
