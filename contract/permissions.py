@@ -12,16 +12,16 @@ CONTACT_PERMS = ['GET','PUT', 'DELETE', 'POST']
 class IsSalesContact(BasePermission):
 
     def has_permission(self, request, view):
-        print(request.data['sales_contact'],request.data)
         if request.method in CONTACT_PERMS:
-
-            customer = Customer.objects.get(id=request.data['customer'])
-            print(customer.sales_contact.id == request.user.id)
-            if customer.sales_contact.id == request.user.id :
-                return True
-            
+            print(request.data,'_________')
+            if request.data.__contains__('customer'):
+                customer = Customer.objects.get(id=request.data['customer'])
+                print(customer.sales_contact,customer.sales_contact.id,request.user.id)
+                if customer.sales_contact.id == request.user.id :
+                    return True
             else:
-                return False
+                if request.method in STAFF_PERMS:
+                    return True
 
 
 class IsManagementTeam(BasePermission):
