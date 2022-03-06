@@ -3,8 +3,8 @@ from .serializers import CustomerListSerializer, CustomerDetailSerializer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
-
-from .permissions import IsStaff, IsSalesContact, IsManagementTeam
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 from .models import Customer
 from staff.models import Staff
 
@@ -27,19 +27,15 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
-    permission_classes = [IsSalesContact | IsStaff | IsManagementTeam]
+    permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
 
     def get_queryset(self, *args, **kwargs):
         queryset = Customer.objects.all()
-        """if "pk" in self.kwargs:
-            return Customer.objects.filter(pk=self.kwargs['pk'])
-        queryset = Customer.objects.filter(Q(creator_id=self.request.user.id))"""
         return queryset
     
     def create(self, request):
         serializer = CustomerDetailSerializer(data=request.data)
         data = {}
-        print(request.data['sales_contact'],'-----------------------')
         valid_staff = Staff.objects.get(pk=request.data['sales_contact'])
         if valid_staff.role != 'sales team':
             data['response'] = "Staff is not from sales team"

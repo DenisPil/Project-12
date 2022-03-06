@@ -2,5 +2,9 @@ from django.contrib import admin
 
 from .models import Event, Status
 
-admin.site.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('contract_event','event_date','support_contact', 'event_status')
+
+
+admin.site.register(Event, EventAdmin)
 admin.site.register(Status)

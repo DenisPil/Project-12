@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
 from .models import Staff
-
+from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
+from rest_framework.permissions import IsAuthenticated
 
 class MultipleSerializerMixin:
     
@@ -25,18 +26,14 @@ class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = StaffListSerializer
     detail_serializer_class = StaffDetailSerializer
+    permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
     
     def get_queryset(self, *args, **kwargs):
         queryset = Staff.objects.all()
-        print(kwargs,args,"________________________________")
-        """if "pk" in self.kwargs:
-            return Customer.objects.filter(pk=self.kwargs['pk'])
-        queryset = Customer.objects.filter(Q(creator_id=self.request.user.id))"""
         return queryset
     
     def create(self, request):
         serializer = StaffSignupSerializer(data=request.data)
-        print(request.data,'-----------------------')
         data = {}
         if serializer.is_valid(request):
             serializer.save()
