@@ -31,8 +31,14 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         queryset = Customer.objects.all()
+        customer_email = self.request.GET.get('email')
+        customer_name = self.request.GET.get('name')
+        if customer_email:
+            queryset = Customer.objects.filter(email=customer_email)
+        elif customer_name:
+            queryset = Customer.objects.filter(last_name=customer_name)
         return queryset
-    
+
     def create(self, request):
         serializer = CustomerDetailSerializer(data=request.data)
         data = {}

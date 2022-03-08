@@ -7,7 +7,8 @@ from .models import Event
 from staff.models import Staff
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
-
+from customer.models import Customer
+from contract.models import Contract
 
 class MultipleSerializerMixin:
     
@@ -31,6 +32,20 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
     
     def get_queryset(self, *args, **kwargs):
         queryset = Event.objects.all()
+        customer_email = self.request.GET.get('email')
+        customer_name = self.request.GET.get('name')
+        event_date = self.request.GET.get('date')
+        if customer_email:
+            customer = Customer.objects.get(email=customer_email)
+            contract = Contract.objects.get(customer=customer.id)
+            queryset = Event.objects.filter(contract_event=contract)
+        elif customer_name:
+            customer = Customer.objects.get(last_name=customer_name)
+            contract = Contract.objects.get(customer=customer.id)
+            queryset = Event.objects.filter(contract_event=contract)
+        elif event_date: 
+            queryset = Event.objects.filter(event_date=event_date)
+
         return queryset
     
     def create(self, request):

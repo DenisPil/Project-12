@@ -5,9 +5,10 @@ from rest_framework import status
 
 from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 from rest_framework.permissions import IsAuthenticated
-from .serializers import CreateContractSerializer, ContractDetailSerializer, ContractListSerializer
+from .serializers import CreateContractSerializer, ContractDetailSerializer, ContractListSerializer, ContractParamSerializer
 from .models import Contract
 from staff.models import Staff
+from customer.models import Customer
 
 class MultipleSerializerMixin:
     
@@ -31,6 +32,20 @@ class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
     
     def get_queryset(self, *args, **kwargs):
         queryset = Contract.objects.all()
+        customer_email = self.request.GET.get('email')
+        customer_name = self.request.GET.get('name')
+        date_created = self.request.GET.get('date contract')
+        amount = self.request.GET.get('prix contract')
+        if customer_email:
+            customer = Customer.objects.get(email=customer_email)
+            queryset = Contract.objects.filter(customer=customer.id)
+        elif customer_name:
+            customer = Customer.objects.get(last_name=customer_name)
+            queryset = Contract.objects.filter(customer=customer.id)
+        elif date_created: 
+            queryset = Contract.objects.filter(date_created=date_created)
+        elif amount:
+            queryset = Contract.objects.filter(amount=amount)
         return queryset
     
     def create(self, request):

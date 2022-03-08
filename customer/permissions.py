@@ -19,6 +19,11 @@ class IsSalesContact(BasePermission):
                     return True
                 else:
                     return False
+            else:
+                if request.user.role == "sales team" :
+                    return True
+                else:
+                    return False
 
 
 class IsManagementTeam(BasePermission):
