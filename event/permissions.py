@@ -1,38 +1,52 @@
 from rest_framework.permissions import BasePermission
 from rest_framework import permissions
 
-from .models import Customer
+from .models import Event
+from contract.models import Contract
 
 
 STAFF_PERMS = ['GET']
-SALES_PERMS = ['GET','POST']
-SUPPORT_PERMS = ['GET','PUT', 'DELETE']
+SALES_PERMS = ['GET', 'POST']
+SUPPORT_PERMS = ['GET', 'PUT', 'DELETE']
+MANAGEMENT_PERMS = ['GET', 'PUT', 'POST', 'DELETE']
 
 
 class IsSalesContact(BasePermission):
 
     def has_permission(self, request, view):
         if request.method in SALES_PERMS:
-            if 'pk' in view.kwargs:
-                customer = Customer.objects.get(id=view.kwargs['pk'])
-                print(customer.sales_contact.id == request.user.id)
-                if customer.sales_contact.id == request.user.id :
+            if request.data.__contains__('contract_event'):
+                contract = Contract.objects.get(id=request.data['contract_event'])
+                if contract.sales_contact.id == request.user.id :
                     return True
                 else:
-                    return False
+                    if request.method in STAFF_PERMS:
+                        return True
+            else:
+                    if request.method in STAFF_PERMS:
+                        return True
 
 
 class IsManagementTeam(BasePermission):
 
     def has_permission(self, request, view):
         if request.user.role == 'management team':
-            if request.method in SALES_PERMS:
+            if request.method in MANAGEMENT_PERMS:
                 return True
 
 
 class IsSupportTeam(BasePermission):
-    
+
     def has_permission(self, request, view):
-        if request.user.role == 'support team':
-            if request.method in SALES_PERMS:
-                return True
+        if request.method in SUPPORT_PERMS:
+            if 'pk' in view.kwargs:
+                print(view.kwargs)
+                event = Event.objects.get(id=view.kwargs['pk'])
+                if event.support_contact.id == request.user.id :
+                    return True
+                else:
+                    if request.method in STAFF_PERMS:
+                        return True
+            else:
+                    if request.method in STAFF_PERMS:
+                        return True

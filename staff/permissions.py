@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 
 STAFF_PERMS = ['GET']
-CONTACT_PERMS = ['GET','PUT', 'DELETE', 'POST']
+MANAGEMENT_PERMS = ['GET','PUT', 'DELETE', 'POST']
 
 
 class IsSalesContact(BasePermission):
@@ -18,7 +18,7 @@ class IsManagementTeam(BasePermission):
 
     def has_permission(self, request, view):
         if request.user.role == 'management team':
-            if request.method in CONTACT_PERMS:
+            if request.method in MANAGEMENT_PERMS:
                 return True
 
 

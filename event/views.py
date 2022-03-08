@@ -5,6 +5,8 @@ from rest_framework.viewsets import ModelViewSet
 from .serializers import CreateEventSerializer, EventListSerializer, EventDetailSerializer
 from .models import Event
 from staff.models import Staff
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 
 
 class MultipleSerializerMixin:
@@ -25,19 +27,15 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
+    permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
     
     def get_queryset(self, *args, **kwargs):
         queryset = Event.objects.all()
-        print(kwargs,args,"________________________________")
-        """if "pk" in self.kwargs:
-            return Customer.objects.filter(pk=self.kwargs['pk'])
-        queryset = Customer.objects.filter(Q(creator_id=self.request.user.id))"""
         return queryset
     
     def create(self, request):
         serializer = CreateEventSerializer(data=request.data)
         data = {}
-        print(request.data,'-----------------------')
         valid_staff = Staff.objects.get(pk=request.data['support_contact'])
         valid_contract = Event.objects.filter(contract_event=request.data['contract_event'])
         if len(valid_contract) != 0:
