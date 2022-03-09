@@ -10,6 +10,7 @@ class CreateEventSerializer(serializers.ModelSerializer):
                   'event_date',
                   'number_guests',
                   'commentary',
+                  'event_status',
                   'support_contact' ]
 
 

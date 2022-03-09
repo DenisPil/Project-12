@@ -28,7 +28,7 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
-    permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
+    # permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
     
     def get_queryset(self, *args, **kwargs):
         queryset = Event.objects.all()

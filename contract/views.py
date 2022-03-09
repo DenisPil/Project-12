@@ -28,7 +28,7 @@ class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = ContractListSerializer
     detail_serializer_class = ContractDetailSerializer
-    permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
+    # permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
     
     def get_queryset(self, *args, **kwargs):
         queryset = Contract.objects.all()
