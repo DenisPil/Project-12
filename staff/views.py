@@ -7,6 +7,16 @@ from rest_framework import status
 from .models import Staff
 from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 from rest_framework.permissions import IsAuthenticated
+import logging
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+file_handler = logging.FileHandler("account.log")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 
 class MultipleSerializerMixin:
     
@@ -30,6 +40,8 @@ class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
     
     def get_queryset(self, *args, **kwargs):
         queryset = Staff.objects.all()
+        logger.debug("current user is: {}".format(self.request.user))
+        logger.debug("http method: {} status code: {}".format(self.request.method,Response().status_code))
         return queryset
     
     def create(self, request):
@@ -38,8 +50,10 @@ class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
         if serializer.is_valid(request):
             serializer.save()
             data['response'] = "Successfully registered a new user"
-
-        return Response(data, status=status.HTTP_201_CREATED) 
+            response = Response(data, status=status.HTTP_201_CREATED)
+            logger.debug("current user is: {}".format(self.request.user))
+            logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+        return response
 
 
     def update(self, request, *args, **kwargs):
@@ -49,11 +63,17 @@ class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED, headers=headers)
+        response = Response(serializer.data, status=status.HTTP_202_ACCEPTED, headers=headers)
+        logger.debug("current user is: {}".format(self.request.user))
+        logger.debug("http method: {} status code: {}".format(self.request.method,response.status_code))
+        return response
 
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
         data = {"response": "Le collaborateur est supprimé."}
-        return Response(data, status=status.HTTP_204_NO_CONTENT)
+        response = Response(data, status=status.HTTP_204_NO_CONTENT)
+        logger.debug("current user is: {}".format(self.request.user))
+        logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+        return response

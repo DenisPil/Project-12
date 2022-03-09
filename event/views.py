@@ -9,6 +9,16 @@ from rest_framework.permissions import IsAuthenticated
 from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 from customer.models import Customer
 from contract.models import Contract
+import logging
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+file_handler = logging.FileHandler("account.log")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 
 class MultipleSerializerMixin:
     
@@ -45,7 +55,8 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
             queryset = Event.objects.filter(contract_event=contract)
         elif event_date: 
             queryset = Event.objects.filter(event_date=event_date)
-
+        logger.debug("current user is: {}".format(self.request.user))
+        logger.debug("http method: {} status code: {}".format(self.request.method,Response().status_code))
         return queryset
     
     def create(self, request):
@@ -55,15 +66,24 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
         valid_contract = Event.objects.filter(contract_event=request.data['contract_event'])
         if len(valid_contract) != 0:
             data['response'] = "This contract is already linked to an event"
-            return Response(data, status=status.HTTP_406_NOT_ACCEPTABLE) 
+            response = Response(data, status=status.HTTP_406_NOT_ACCEPTABLE)
+            logger.debug("current user is: {}".format(self.request.user))
+            logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+            return response
         if valid_staff.role != 'support team':
             data['response'] = "Staff is not from support team"
-            return Response(data, status=status.HTTP_406_NOT_ACCEPTABLE) 
+            response = Response(data, status=status.HTTP_406_NOT_ACCEPTABLE) 
+            logger.debug("current user is: {}".format(self.request.user))
+            logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+            return response
         else:
             if serializer.is_valid(request):
                 serializer.save()
                 data['response'] = "Successfully registered a new user"
-            return Response(data, status=status.HTTP_201_CREATED) 
+                response = Response(data, status=status.HTTP_201_CREATED)
+                logger.debug("current user is: {}".format(self.request.user))
+                logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+            return response
 
 
     def update(self, request, *args, **kwargs):
@@ -73,11 +93,17 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED, headers=headers)
+        response = Response(serializer.data, status=status.HTTP_202_ACCEPTED, headers=headers)
+        logger.debug("current user is: {}".format(self.request.user))
+        logger.debug("http method: {} status code: {}".format(self.request.method,response.status_code))
+        return response
 
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
         data = {"response": "L'évennement est supprimé."}
-        return Response(data, status=status.HTTP_204_NO_CONTENT)
+        response = Response(data, status=status.HTTP_204_NO_CONTENT)
+        logger.debug("current user is: {}".format(self.request.user))
+        logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+        return

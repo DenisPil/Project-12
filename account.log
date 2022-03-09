@@ -1,0 +1,36 @@
+2022-03-09 17:47:16,567:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:47:16,568:DEBUG:customer.views:http method: GET
+2022-03-09 17:48:27,086:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:49:08,694:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:49:19,850:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:49:19,850:DEBUG:customer.views:http method: GET
+2022-03-09 17:50:42,851:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:50:42,852:DEBUG:customer.views:http method: GET
+2022-03-09 17:51:15,856:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:51:15,857:DEBUG:customer.views:http method: GET
+2022-03-09 17:51:23,022:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:51:23,023:DEBUG:customer.views:http method: GET
+2022-03-09 17:51:52,146:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:51:52,147:DEBUG:customer.views:http method: GET
+2022-03-09 17:51:54,306:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:51:54,306:DEBUG:customer.views:http method: GET
+2022-03-09 17:53:02,812:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:53:02,813:DEBUG:customer.views:http method: GET
+2022-03-09 17:54:07,036:DEBUG:customer.views:current user is: AnonymousUser
+2022-03-09 17:54:07,036:DEBUG:customer.views:http method: GET status code: 200
+2022-03-09 17:56:02,839:DEBUG:customer.views:current user is: salesteam2
+2022-03-09 17:56:02,840:DEBUG:customer.views:http method: GET status code: 200
+2022-03-09 17:56:12,215:DEBUG:customer.views:current user is: salesteam2
+2022-03-09 17:56:12,215:DEBUG:customer.views:http method: POST status code: 200
+2022-03-09 17:56:48,059:DEBUG:customer.views:current user is: salesteam2
+2022-03-09 17:56:48,059:DEBUG:customer.views:http method: POST status code: 200
+2022-03-09 17:57:20,417:DEBUG:customer.views:current user is: salesteam2
+2022-03-09 17:57:20,418:DEBUG:customer.views:http method: POST status code: 200
+2022-03-09 17:57:59,004:DEBUG:customer.views:current user is: salesteam2
+2022-03-09 17:57:59,005:DEBUG:customer.views:http method: POST status code: 200
+2022-03-09 17:57:59,005:DEBUG:customer.views:http method: POST status code: <Response status_code=406, "text/html; charset=utf-8">
+2022-03-09 17:58:36,403:DEBUG:customer.views:current user is: salesteam2
+2022-03-09 17:58:36,404:DEBUG:customer.views:http method: POST status code: 200
+2022-03-09 17:58:36,404:DEBUG:customer.views:http method: POST status code: 406
+2022-03-09 17:59:54,722:DEBUG:customer.views:current user is: salesteam2
+2022-03-09 17:59:54,723:DEBUG:customer.views:http method: POST status code: 406, Staff is not from sales team
