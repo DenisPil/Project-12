@@ -7,6 +7,8 @@ MANAGEMENT_PERMS = ['GET', 'PUT', 'DELETE', 'POST']
 
 class IsSalesContact(BasePermission):
 
+    """Les permissions de l'équipe de vente pour le staff"""
+
     def has_permission(self, request, view):
         if request.user.role == 'sales team':
             if request.method in STAFF_PERMS:
@@ -15,6 +17,8 @@ class IsSalesContact(BasePermission):
 
 class IsManagementTeam(BasePermission):
 
+    """Les permissions de l'équipe de management pour le staff"""
+
     def has_permission(self, request, view):
         if request.user.role == 'management team':
             if request.method in MANAGEMENT_PERMS:
@@ -22,6 +26,8 @@ class IsManagementTeam(BasePermission):
 
 
 class IsSupportTeam(BasePermission):
+
+    """Les permissions de l'équipe support pour le staff"""
 
     def has_permission(self, request, view):
         if request.user.role == 'support team':

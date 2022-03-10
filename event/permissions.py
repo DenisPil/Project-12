@@ -12,6 +12,8 @@ MANAGEMENT_PERMS = ['GET', 'PUT', 'POST', 'DELETE']
 
 class IsSalesContact(BasePermission):
 
+    """Les permissions de l'équipe de vente pour les événements"""
+
     def has_permission(self, request, view):
         if request.method in SALES_PERMS:
             if request.data.__contains__('contract_event'):
@@ -28,6 +30,8 @@ class IsSalesContact(BasePermission):
 
 class IsManagementTeam(BasePermission):
 
+    """Les permissions de l'équipe de management pour les événements"""
+
     def has_permission(self, request, view):
         if request.user.role == 'management team':
             if request.method in MANAGEMENT_PERMS:
@@ -35,6 +39,8 @@ class IsManagementTeam(BasePermission):
 
 
 class IsSupportTeam(BasePermission):
+
+    """Les permissions de l'équipe support pour les événements"""
 
     def has_permission(self, request, view):
         if request.method in SUPPORT_PERMS:

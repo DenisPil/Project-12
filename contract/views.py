@@ -39,7 +39,7 @@ class MultipleSerializerMixin:
 
 class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
 
-    """ Le ModelViewSet de l'inscription """
+    """ Le ModelViewSet des contracts """
 
     serializer_class = ContractListSerializer
     detail_serializer_class = ContractDetailSerializer
@@ -61,9 +61,9 @@ class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
             queryset = Contract.objects.filter(date_created=date_created)
         elif amount:
             queryset = Contract.objects.filter(amount=amount)
-        logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}".format(self.request.method,
-                                                              Response().status_code))
+        logger.debug("Current user is: {}.".format(self.request.user))
+        logger.debug("Http method: {} status code: {}.".format(self.request.method,
+                                                               Response().status_code))
         return queryset
 
     def create(self, request):
@@ -71,7 +71,7 @@ class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
         data = {}
         valid_staff = Staff.objects.get(pk=request.data['sales_contact'])
         if valid_staff.role != 'sales team':
-            data['response'] = "Staff is not from sales team"
+            data['response'] = "Staff is not from sales team."
             response = Response(data, status=status.HTTP_406_NOT_ACCEPTABLE)
             logger.debug("current user is: {}".format(self.request.user))
             logger.debug("http method: {} status code: {}, {}".format(self.request.method,
@@ -81,7 +81,7 @@ class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
         else:
             if serializer.is_valid(request):
                 serializer.save()
-                data['response'] = "Successfully registered a new contract"
+                data['response'] = "Successfully registered a new contract."
                 response = Response(data, status=status.HTTP_201_CREATED)
                 logger.debug("current user is: {}".format(self.request.user))
                 logger.debug("http method: {} status code: {}, {}".format(self.request.method,
@@ -105,7 +105,7 @@ class ContractViewSet(MultipleSerializerMixin, ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
-        data = {"response": "Le contract est supprimé."}
+        data = {"response": "The contract is deleted."}
         response = Response(data, status=status.HTTP_204_NO_CONTENT)
         logger.debug("current user is: {}".format(self.request.user))
         logger.debug("http method: {} status code: {}, {}".format(self.request.method,

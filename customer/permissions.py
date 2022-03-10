@@ -9,6 +9,8 @@ CONTACT_PERMS = ['GET', 'PUT', 'DELETE', 'POST']
 
 class IsSalesContact(BasePermission):
 
+    """Les permissions de l'équipe de vente pour les clients"""
+
     def has_permission(self, request, view):
         if request.method in CONTACT_PERMS:
             if 'pk' in view.kwargs:
@@ -27,6 +29,8 @@ class IsSalesContact(BasePermission):
 
 class IsManagementTeam(BasePermission):
 
+    """Les permissions de l'équipe de management pour les clients"""
+
     def has_permission(self, request, view):
         if request.user.role == 'management team':
             if request.method in CONTACT_PERMS:
@@ -34,6 +38,8 @@ class IsManagementTeam(BasePermission):
 
 
 class IsSupportTeam(BasePermission):
+
+    """Les permissions de l'équipe support pour les clients"""
 
     def has_permission(self, request, view):
         if request.user.role == 'support team':
