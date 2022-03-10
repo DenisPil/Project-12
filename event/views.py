@@ -1,15 +1,16 @@
-from django.shortcuts import render
+import logging
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from .serializers import CreateEventSerializer, EventListSerializer, EventDetailSerializer
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Event
 from staff.models import Staff
-from rest_framework.permissions import IsAuthenticated
-from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 from customer.models import Customer
 from contract.models import Contract
-import logging
+from .serializers import CreateEventSerializer, EventListSerializer, EventDetailSerializer
+from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 
 
 logger = logging.getLogger(__name__)
@@ -21,7 +22,7 @@ logger.addHandler(file_handler)
 
 
 class MultipleSerializerMixin:
-    
+
     """ Mixin permet d'afficher les vues en détail ou en liste"""
 
     detail_serializer_class = None
@@ -33,13 +34,13 @@ class MultipleSerializerMixin:
 
 
 class EventViewSet(MultipleSerializerMixin, ModelViewSet):
-    
+
     """ Le ModelViewSet de l'inscription """
 
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
-    # permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
-    
+    permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
+
     def get_queryset(self, *args, **kwargs):
         queryset = Event.objects.all()
         customer_email = self.request.GET.get('email')
@@ -53,12 +54,13 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
             customer = Customer.objects.get(last_name=customer_name)
             contract = Contract.objects.get(customer=customer.id)
             queryset = Event.objects.filter(contract_event=contract)
-        elif event_date: 
+        elif event_date:
             queryset = Event.objects.filter(event_date=event_date)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}".format(self.request.method,Response().status_code))
+        logger.debug("http method: {} status code: {}".format(self.request.method,
+                                                              Response().status_code))
         return queryset
-    
+
     def create(self, request):
         serializer = CreateEventSerializer(data=request.data)
         data = {}
@@ -68,13 +70,17 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
             data['response'] = "This contract is already linked to an event"
             response = Response(data, status=status.HTTP_406_NOT_ACCEPTABLE)
             logger.debug("current user is: {}".format(self.request.user))
-            logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+            logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                      response.status_code,
+                                                                      data['response']))
             return response
         if valid_staff.role != 'support team':
             data['response'] = "Staff is not from support team"
-            response = Response(data, status=status.HTTP_406_NOT_ACCEPTABLE) 
+            response = Response(data, status=status.HTTP_406_NOT_ACCEPTABLE)
             logger.debug("current user is: {}".format(self.request.user))
-            logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+            logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                      response.status_code,
+                                                                      data['response']))
             return response
         else:
             if serializer.is_valid(request):
@@ -82,9 +88,10 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
                 data['response'] = "Successfully registered a new user"
                 response = Response(data, status=status.HTTP_201_CREATED)
                 logger.debug("current user is: {}".format(self.request.user))
-                logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+                logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                          response.status_code,
+                                                                          data['response']))
             return response
-
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -95,9 +102,9 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         response = Response(serializer.data, status=status.HTTP_202_ACCEPTED, headers=headers)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}".format(self.request.method,response.status_code))
+        logger.debug("http method: {} status code: {}".format(self.request.method,
+                                                              response.status_code))
         return response
-
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -105,5 +112,7 @@ class EventViewSet(MultipleSerializerMixin, ModelViewSet):
         data = {"response": "L'évennement est supprimé."}
         response = Response(data, status=status.HTTP_204_NO_CONTENT)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+        logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                  response.status_code,
+                                                                  data['response']))
         return

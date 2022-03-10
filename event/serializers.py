@@ -1,5 +1,5 @@
-from dataclasses import fields
 from rest_framework import serializers
+
 from .models import Event
 
 
@@ -11,7 +11,7 @@ class CreateEventSerializer(serializers.ModelSerializer):
                   'number_guests',
                   'commentary',
                   'event_status',
-                  'support_contact' ]
+                  'support_contact']
 
 
 class EventDetailSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class EventDetailSerializer(serializers.ModelSerializer):
                   'event_date',
                   'number_guests',
                   'commentary',
-                  'support_contact' ]
+                  'support_contact']
 
 
 class EventListSerializer(serializers.ModelSerializer):
@@ -32,4 +32,4 @@ class EventListSerializer(serializers.ModelSerializer):
                   'event_date',
                   'number_guests',
                   'commentary',
-                  'support_contact' ]
+                  'support_contact']

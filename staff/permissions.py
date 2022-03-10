@@ -1,9 +1,8 @@
 from rest_framework.permissions import BasePermission
-from rest_framework import permissions
 
 
 STAFF_PERMS = ['GET']
-MANAGEMENT_PERMS = ['GET','PUT', 'DELETE', 'POST']
+MANAGEMENT_PERMS = ['GET', 'PUT', 'DELETE', 'POST']
 
 
 class IsSalesContact(BasePermission):
@@ -23,7 +22,7 @@ class IsManagementTeam(BasePermission):
 
 
 class IsSupportTeam(BasePermission):
-    
+
     def has_permission(self, request, view):
         if request.user.role == 'support team':
             if request.method in STAFF_PERMS:

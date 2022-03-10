@@ -1,13 +1,13 @@
-from django.shortcuts import render
-from django.shortcuts import render
-from .serializers import StaffDetailSerializer, StaffListSerializer, StaffSignupSerializer
+import logging
+
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Staff
 from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
-from rest_framework.permissions import IsAuthenticated
-import logging
+from .serializers import StaffDetailSerializer, StaffListSerializer, StaffSignupSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ logger.addHandler(file_handler)
 
 
 class MultipleSerializerMixin:
-    
+
     """ Mixin permet d'afficher les vues en détail ou en liste"""
 
     detail_serializer_class = None
@@ -31,19 +31,20 @@ class MultipleSerializerMixin:
 
 
 class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
-    
+
     """ Le ModelViewSet de l'inscription """
 
     serializer_class = StaffListSerializer
     detail_serializer_class = StaffDetailSerializer
     permission_classes = [IsAuthenticated, IsSalesContact | IsManagementTeam | IsSupportTeam]
-    
+
     def get_queryset(self, *args, **kwargs):
         queryset = Staff.objects.all()
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}".format(self.request.method,Response().status_code))
+        logger.debug("http method: {} status code: {}".format(self.request.method,
+                                                              Response().status_code))
         return queryset
-    
+
     def create(self, request):
         serializer = StaffSignupSerializer(data=request.data)
         data = {}
@@ -52,9 +53,10 @@ class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
             data['response'] = "Successfully registered a new user"
             response = Response(data, status=status.HTTP_201_CREATED)
             logger.debug("current user is: {}".format(self.request.user))
-            logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+            logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                      response.status_code,
+                                                                      data['response']))
         return response
-
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -65,9 +67,9 @@ class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         response = Response(serializer.data, status=status.HTTP_202_ACCEPTED, headers=headers)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}".format(self.request.method,response.status_code))
+        logger.debug("http method: {} status code: {}".format(self.request.method,
+                                                              response.status_code))
         return response
-
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -75,5 +77,7 @@ class StaffViewSet(MultipleSerializerMixin, ModelViewSet):
         data = {"response": "Le collaborateur est supprimé."}
         response = Response(data, status=status.HTTP_204_NO_CONTENT)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+        logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                  response.status_code,
+                                                                  data['response']))
         return response

@@ -1,13 +1,14 @@
-from django.shortcuts import render
-from .serializers import CustomerListSerializer, CustomerDetailSerializer
+import logging
+
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
+
 from .models import Customer
 from staff.models import Staff
-import logging
+from .serializers import CustomerListSerializer, CustomerDetailSerializer
+from .permissions import IsSupportTeam, IsSalesContact, IsManagementTeam
 
 
 logger = logging.getLogger(__name__)
@@ -19,11 +20,11 @@ logger.addHandler(file_handler)
 
 
 class MultipleSerializerMixin:
-    
+
     """ Mixin permet d'afficher les vues en détail ou en liste"""
 
     detail_serializer_class = None
-    
+
     def get_serializer_class(self):
         if self.action == 'retrieve' and self.detail_serializer_class is not None:
             return self.detail_serializer_class
@@ -31,7 +32,7 @@ class MultipleSerializerMixin:
 
 
 class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
-    
+
     """ Le ModelViewSet de l'inscription """
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
@@ -46,7 +47,8 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
         elif customer_name:
             queryset = Customer.objects.filter(last_name=customer_name)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}".format(self.request.method,Response().status_code))
+        logger.debug("http method: {} status code: {}".format(self.request.method,
+                                                              Response().status_code))
         return queryset
 
     def create(self, request):
@@ -57,18 +59,20 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
             data['response'] = "Staff is not from sales team"
             response = Response(data, status=status.HTTP_406_NOT_ACCEPTABLE)
             logger.debug("current user is: {}".format(self.request.user))
-            logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+            logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                      response.status_code,
+                                                                      data['response']))
             return response
-             
         else:
             if serializer.is_valid(request):
                 serializer.save()
                 data['response'] = "Successfully registered a new user"
                 response = Response(data, status=status.HTTP_201_CREATED)
                 logger.debug("current user is: {}".format(self.request.user))
-                logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
-            return response 
-
+                logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                          response.status_code,
+                                                                          data['response']))
+            return response
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -79,9 +83,9 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         response = Response(serializer.data, status=status.HTTP_202_ACCEPTED, headers=headers)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}".format(self.request.method,response.status_code))
+        logger.debug("http method: {} status code: {}".format(self.request.method,
+                                                              response.status_code))
         return response
-
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -89,5 +93,7 @@ class CustomerViewSet(MultipleSerializerMixin, ModelViewSet):
         data = {"response": "Le client est supprimé."}
         response = Response(data, status=status.HTTP_204_NO_CONTENT)
         logger.debug("current user is: {}".format(self.request.user))
-        logger.debug("http method: {} status code: {}, {}".format(self.request.method,response.status_code, data['response']))
+        logger.debug("http method: {} status code: {}, {}".format(self.request.method,
+                                                                  response.status_code,
+                                                                  data['response']))
         return response

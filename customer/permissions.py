@@ -1,11 +1,10 @@
 from rest_framework.permissions import BasePermission
-from rest_framework import permissions
 
 from .models import Customer
 
 
 STAFF_PERMS = ['GET']
-CONTACT_PERMS = ['GET','PUT', 'DELETE', 'POST']
+CONTACT_PERMS = ['GET', 'PUT', 'DELETE', 'POST']
 
 
 class IsSalesContact(BasePermission):
@@ -15,12 +14,12 @@ class IsSalesContact(BasePermission):
             if 'pk' in view.kwargs:
                 customer = Customer.objects.get(id=view.kwargs['pk'])
                 print(customer.sales_contact.id == request.user.id)
-                if customer.sales_contact.id == request.user.id :
+                if customer.sales_contact.id == request.user.id:
                     return True
                 else:
                     return False
             else:
-                if request.user.role == "sales team" :
+                if request.user.role == "sales team":
                     return True
                 else:
                     return False
@@ -35,7 +34,7 @@ class IsManagementTeam(BasePermission):
 
 
 class IsSupportTeam(BasePermission):
-    
+
     def has_permission(self, request, view):
         if request.user.role == 'support team':
             if request.method in STAFF_PERMS:

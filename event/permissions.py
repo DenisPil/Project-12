@@ -1,5 +1,4 @@
 from rest_framework.permissions import BasePermission
-from rest_framework import permissions
 
 from .models import Event
 from contract.models import Contract
@@ -17,14 +16,14 @@ class IsSalesContact(BasePermission):
         if request.method in SALES_PERMS:
             if request.data.__contains__('contract_event'):
                 contract = Contract.objects.get(id=request.data['contract_event'])
-                if contract.sales_contact.id == request.user.id :
+                if contract.sales_contact.id == request.user.id:
                     return True
                 else:
                     if request.method in STAFF_PERMS:
                         return True
             else:
-                    if request.method in STAFF_PERMS:
-                        return True
+                if request.method in STAFF_PERMS:
+                    return True
 
 
 class IsManagementTeam(BasePermission):
@@ -42,11 +41,11 @@ class IsSupportTeam(BasePermission):
             if 'pk' in view.kwargs:
                 print(view.kwargs)
                 event = Event.objects.get(id=view.kwargs['pk'])
-                if event.support_contact.id == request.user.id :
+                if event.support_contact.id == request.user.id:
                     return True
                 else:
                     if request.method in STAFF_PERMS:
                         return True
             else:
-                    if request.method in STAFF_PERMS:
-                        return True
+                if request.method in STAFF_PERMS:
+                    return True

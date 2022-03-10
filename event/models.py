@@ -6,10 +6,10 @@ from staff.models import Staff
 
 
 class Status(models.TextChoices):
-    
+
     PAYMENT_IN_PROGRESS = 'paiement en cours'
     FULL_PAYMENT = 'payé'
-    FUTURE_EVENT =  'événement à venir'
+    FUTURE_EVENT = 'événement à venir'
     CURRENT_EVENT = 'événement en cours'
     ENDED_EVENT = 'événement terminé'
 

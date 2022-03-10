@@ -2,7 +2,7 @@ from django.db import models
 
 from customer.models import Customer
 from staff.models import Staff
-from customer.models import Customer
+
 
 class Contract(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='customercontract')
