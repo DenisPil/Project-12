@@ -1,7 +1,7 @@
 # Programme LitReview.
 
 <p align="center">
-<img src="https:https://user.oc-static.com/upload/2020/09/22/16007804386673_P10.png" width="25%"></img>
+<img src="https://user.oc-static.com/upload/2020/09/22/16007804386673_P10.png" width="25%"></img>
 </p>
 
 
