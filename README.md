@@ -1,4 +1,4 @@
-# Programme LitReview.
+# Programme Epic-Event.
 
 <p align="center">
 <img src="https://user.oc-static.com/upload/2020/09/22/16007804386673_P10.png" width="25%"></img>
@@ -142,6 +142,9 @@ GET : http://127.0.0.1:8000/customer/
 ````
 * Permet de visualiser la liste de tous les clients.
 * Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
+* Filtre : il est possible de filtrer les clients à partir de leur nom ou de leur email :
+  * ```` GET : http://127.0.0.1:8000/event/?name="nom du client" ````
+  * ```` GET : http://127.0.0.1:8000/event/?email="email du client" ````
 
 ````
 GET : http://127.0.0.1:8000/customer/'ID-du-client'
@@ -185,6 +188,11 @@ GET : http://127.0.0.1:8000/contract/
 ````
 * Permet de visualiser la liste de tous les contracts.
 * Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
+* Filtre : il est possible de filtrer les contract à partir du nom du client qui est lié au contract, l'email du client qui est lié au contract, la date du contract ou le montant du contract :
+  * ````http://127.0.0.1:8000/contract/?name="nom du client"````
+  * ````http://127.0.0.1:8000/contract/?email="email du client"````
+  * ````http://127.0.0.1:8000/contract/?date contract="la date du contract"````
+  * ````http://127.0.0.1:8000/contract/?prix contract="le montant du contract"````
 
 ````
 GET : http://127.0.0.1:8000/contract/"ID-du-contract"
@@ -226,7 +234,10 @@ GET : http://127.0.0.1:8000/event/
 ````
 * Permet de visualiser la liste de tous les événements.
 * Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
-
+* Filtre : Il est possible de filtrer les événement à partir du nom du client, l'email du client, la date de l'événement :
+  * ```` GET : http://127.0.0.1:8000/event/?name="le nom du client"````
+  * ```` GET : http://127.0.0.1:8000/event/?email="l'email du client"````
+  * ```` GET : http://127.0.0.1:8000/event/?date="la date de l'événement"````
 ````
 GET : http://127.0.0.1:8000/event/"ID-d'un-événement"
 ````
