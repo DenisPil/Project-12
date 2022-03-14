@@ -103,7 +103,7 @@ GET : http://127.0.0.1:8000/staff/
 GET : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
 ````
 * Permet de visualiser les informations détaillé d'un collaborateur.
-* Authorisation : Être authentifié.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
 
 ````
 PUT : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
@@ -161,18 +161,92 @@ PUT : http://127.0.0.1:8000/customer/'ID-du-client'
   * company_name : Le nom de l'entreprise du client
   * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
 * Permet de supprimer un un membre de l'équipe d'Epic Event.
-* Authorisation : Seul un membre de l'équipe de management peut modifier un collaborateur.
+* Authorisation : L'équipe de vente, l'équipe de management peuvent modifier les informations d'un client.
 
 ````
 DEL : http://127.0.0.1:8000/customer/'ID-du-client'
 ````
 * Permet de supprimer un client de la base de données.
-* Authorisation : Seul un membre de l'équipe de management peut modifier un collaborateur.
+* Authorisation : L'équipe de vente, l'équipe de management peuvent supprimé d'un client.
 
+#### CONTRACT
+````
+POST : http://127.0.0.1:8000/contract/
+````
+* Permet de créer un contract qui lie un client à un futur événement. Les informations requise :
+  * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
+  * customer : L'ID (l'identifiant) du client pour qui est créer le contract
+  * status : Le Contract est t'il signé si oui "True", si il ne l'est pas "False"
+  * amount : Le prix de l'événement
+* Authorisation : L'équipe de vente, l'équipe de management peuvent supprimé un .
 
+````
+GET : http://127.0.0.1:8000/contract/
+````
+* Permet de visualiser la liste de tous les contracts.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
 
+````
+GET : http://127.0.0.1:8000/contract/"ID-du-contract"
+````
+* Permet de visualiser les informations détaillé d'un contract.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
 
+````
+PUT : http://127.0.0.1:8000/contract/"ID-du-contract"
+````
+* Permet de modifier un contract. Les informations requise :
+  * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
+  * customer : L'ID (l'identifiant) du client pour qui est créer le contract
+  * status : Le Contract est t'il signé si oui "True", si il ne l'est pas "False"
+  * amount : Le prix de l'événement
+* Authorisation : L'équipe de vente et l'équipe de management peuvent créer un contract.
 
+````
+DEL : http://127.0.0.1:8000/contract/"ID-du-contract"
+````
+* Permet de supprimer un contract.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
 
+#### EVENT
+````
+POST : http://127.0.0.1:8000/event/
+````
+* Permet la création d'un événement.
+  * contract_event : L'ID (l'identifiant) du contract pour lequel l'événement est créer
+  * event_date : La date de l'événment
+  * number_guests : Le nombre d'invité à l'événement
+  * commentary : Un commentaire sur l'événement (informations diverse sur l'événement)
+  * support_contact : L'ID (l'identifiant) d'un membre de l'équipe de support qui aura en charge l'événement
+  * event_status : Les status : 'paiement en cours', 'payé', 'événement à venir', 'événement en cours', 'événement terminé'
+* Authorisation : L'équipe de vente et l'équipe de management peuvent créer un événement.
 
+````
+GET : http://127.0.0.1:8000/event/
+````
+* Permet de visualiser la liste de tous les événements.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
 
+````
+GET : http://127.0.0.1:8000/event/"ID-d'un-événement"
+````
+* Permet de visualiser un événement en détail.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
+
+````
+PUT : http://127.0.0.1:8000/event/"ID-d'un-événement"
+````
+* Permet de modifier les informations d'un événement.
+  * contract_event : L'ID (l'identifiant) du contract pour lequel l'événement est créer
+  * event_date : La date de l'événment
+  * number_guests : Le nombre d'invité à l'événement
+  * commentary : Un commentaire sur l'événement (informations diverse sur l'événement)
+  * support_contact : L'ID (l'identifiant) d'un membre de l'équipe de support qui aura en charge l'événement
+  * event_status : Les status : 'paiement en cours', 'payé', 'événement à venir', 'événement en cours', 'événement terminé'
+* Authorisation : L'équipe de vente et l'équipe de management peuvent créer un événement.
+
+````
+DEL : http://127.0.0.1:8000/event/"ID-d'un-événement"
+````
+* Permet de supprimer un événement.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
