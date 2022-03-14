@@ -4,6 +4,10 @@
 <img src="https://user.oc-static.com/upload/2020/09/22/16007804386673_P10.png" width="25%"></img>
 </p>
 
+## Conditions d'utilisation:
+* Utiliser Python version 3.0 ou +
+* Utiliser Django version 3.0 ou +
+* La base de données PostgreSQL version 12.0 ou +
 
 ## Pour utiliser ce programme il faut commencer par télécharger le dépôt GitHub.
 
@@ -11,11 +15,11 @@
 * Pour cela lancer un terminal, déplacer vous dans le dossier voulue. 
 * créer un nouveau dossier
 ````
-$ mkdir litereview
+$ mkdir epic-event
 ````
 * télécharger le dépôt 
 ````
-$ git clone https://github.com/DenisPil/Project-9
+$ git clone https://github.com/DenisPil/Project-12
 ````
 
 
@@ -63,6 +67,19 @@ $ python manage.py runserver
 * Nom d'utilisateur : admin
 * Mot de passe : admin1
 * Permet de contrôler les informations de la base de donnée. Pouvoir effectuer les opérations CRUD sur les éléments suivants :
-  * Utilisateurs
-  * Reviews
-  * Tickets 
+  * Staff : les équipes d'épic event
+  * Customer : Les clients enregistré dans la base de données
+  * Contract : Les contracts en relation avec les clients et les événements
+  * Event : Les événements
+
+## API :
+La liste des endpoints avec leur autorisations pour accéder au différente fonctions de l'API.
+POST
+````
+POST : http://127.0.0.1:8000/login/
+````
+Permet aux utilisateurs de ce connecter avec leur identifiant. Pour accéder aux prochain endpoint il est nécessaire d'être identifier.
+
+````
+
+````
