@@ -75,14 +75,14 @@ $ python manage.py runserver
 ## API :
 La liste des endpoints avec leur autorisations pour accéder au différente fonctions de l'API.
 
-# LOGIN
+### LOGIN
 ````
 POST : http://127.0.0.1:8000/login/
 ````
 * Permet aux utilisateurs de ce connecter avec leur identifiant. Pour accéder aux prochain endpoint il est nécessaire d'être identifier.
 * Autorisation : Aucune.
 
-# STAFF
+### STAFF
 ````
 POST : http://127.0.0.1:8000/staff/
 ````
@@ -121,7 +121,7 @@ DEL : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
 * Permet de supprimer un un membre de l'équipe d'Epic Event.
 * Authorisation : Seul un membre de l'équipe de management peut modifier un collaborateur.
 
-# CUSTOMER
+### CUSTOMER
 
 ````
 POST : http://127.0.0.1:8000/customer/
