@@ -74,19 +74,105 @@ $ python manage.py runserver
 
 ## API :
 La liste des endpoints avec leur autorisations pour accéder au différente fonctions de l'API.
+
+# LOGIN
 ````
 POST : http://127.0.0.1:8000/login/
 ````
-Permet aux utilisateurs de ce connecter avec leur identifiant. Pour accéder aux prochain endpoint il est nécessaire d'être identifier.
-Autorisation : Aucune.
+* Permet aux utilisateurs de ce connecter avec leur identifiant. Pour accéder aux prochain endpoint il est nécessaire d'être identifier.
+* Autorisation : Aucune.
 
+# STAFF
 ````
 POST : http://127.0.0.1:8000/staff/
 ````
-* Permet de créer un un membre de l'équipe d'Epic Event.
-  * les informations requise :
+* Permet de créer un un membre de l'équipe d'Epic Event. Les informations requise :
   * username : Le nom d'utilisateur
   * email : L'email de l'utilisateur (il doit petre unique)
   * password : Le mot de passe
   * role : Le role du collaborateur il peut être, "sales team", "support team" ou "management team"
-  * Autorisation : Seul un membre de l'équipe de management peut créer un collaborateur.
+* Autorisation : Seul un membre de l'équipe de management peut créer un collaborateur.
+
+````
+GET : http://127.0.0.1:8000/staff/
+````
+* Permet de visualiser la liste de tous les collaborateurs.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
+
+````
+GET : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
+````
+* Permet de visualiser les informations détaillé d'un collaborateur.
+* Authorisation : Être authentifié.
+
+````
+PUT : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
+````
+* Permet de modifier un un membre de l'équipe d'Epic Event. Les informations requise :
+  * username : Le nom d'utilisateur
+  * email : L'email de l'utilisateur (il doit petre unique)
+  * password : Le mot de passe
+  * role : Le role du collaborateur il peut être, "sales team", "support team" ou "management team"
+* Authorisation : Seul un membre de l'équipe de management peut modifier un collaborateur.
+
+````
+DEL : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
+````
+* Permet de supprimer un un membre de l'équipe d'Epic Event.
+* Authorisation : Seul un membre de l'équipe de management peut modifier un collaborateur.
+
+# CUSTOMER
+
+````
+POST : http://127.0.0.1:8000/customer/
+````
+* Permet d'ajouter un client à la base de données. Les informations requise :
+  * first_name : Le prénom du client
+  * last_name : Le nom du client
+  * email : L'email du client
+  * phone : Le numéro de téléphone du client
+  * mobile : Le numéro de mobile du client
+  * company_name : Le nom de l'entreprise du client
+  * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
+* Authorisation : L'équipe de vente et l'équipe de management peuvent créer un client.
+
+
+````
+GET : http://127.0.0.1:8000/customer/
+````
+* Permet de visualiser la liste de tous les clients.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
+
+````
+GET : http://127.0.0.1:8000/customer/'ID-du-client'
+````
+* Permet de visualiser les informations détaillé d'un client.
+* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
+
+````
+PUT : http://127.0.0.1:8000/customer/'ID-du-client'
+````
+* Permet de modifier les informations d'un client. Les informations requise :
+  * first_name : Le prénom du client
+  * last_name : Le nom du client
+  * email : L'email du client
+  * phone : Le numéro de téléphone du client
+  * mobile : Le numéro de mobile du client
+  * company_name : Le nom de l'entreprise du client
+  * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
+* Permet de supprimer un un membre de l'équipe d'Epic Event.
+* Authorisation : Seul un membre de l'équipe de management peut modifier un collaborateur.
+
+````
+DEL : http://127.0.0.1:8000/customer/'ID-du-client'
+````
+* Permet de supprimer un client de la base de données.
+* Authorisation : Seul un membre de l'équipe de management peut modifier un collaborateur.
+
+
+
+
+
+
+
+
