@@ -143,8 +143,8 @@ GET : http://127.0.0.1:8000/customer/
 * Permet de visualiser la liste de tous les clients.
 * Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
 * Filtre : il est possible de filtrer les clients à partir de leur nom ou de leur email :
-  *```` GET : http://127.0.0.1:8000/event/?name="nom du client" ````
-  *```` GET : http://127.0.0.1:8000/event/?email="email du client" ````
+  * ```` GET : http://127.0.0.1:8000/event/?name="nom du client" ````
+  * ```` GET : http://127.0.0.1:8000/event/?email="email du client" ````
 
 ````
 GET : http://127.0.0.1:8000/customer/'ID-du-client'
