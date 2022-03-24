@@ -79,14 +79,14 @@ La liste des endpoints avec leur autorisations pour accéder au différente fonc
 ````
 POST : http://127.0.0.1:8000/login/
 ````
-* Permet aux utilisateurs de ce connecter avec leur identifiant. Pour accéder aux prochain endpoint il est nécessaire d'être identifier.
+* Permet aux utilisateurs de ce connecter avec leur identifiant. Pour accéder aux prochains endpoints il est nécessaire d'être identifier.
 * Autorisation : Aucune.
 
 ### STAFF 
 ````
 POST : http://127.0.0.1:8000/staff/
 ````
-* Permet de créer un un membre de l'équipe d'Epic Event. Les informations requise :
+* Permet de créer un membre de l'équipe d'Epic Event. Les informations requises :
   * username : Le nom d'utilisateur.
   * email : L'email de l'utilisateur (il doit petre unique).
   * password : Le mot de passe.
@@ -108,7 +108,7 @@ GET : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
 ````
 PUT : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
 ````
-* Permet de modifier un un membre de l'équipe d'Epic Event. Les informations requise :
+* Permet de modifier un un membre de l'équipe d'Epic Event. Les informations requises :
   * username : Le nom d'utilisateur.
   * email : L'email de l'utilisateur (il doit petre unique).
   * password : Le mot de passe.
@@ -126,7 +126,7 @@ DEL : http://127.0.0.1:8000/staff/'l'ID-du-collaborateur'
 ````
 POST : http://127.0.0.1:8000/customer/
 ````
-* Permet d'ajouter un client à la base de données. Les informations requise :
+* Permet d'ajouter un client à la base de données. Les informations requises :
   * first_name : Le prénom du client.
   * last_name : Le nom du client.
   * email : L'email du client.
@@ -155,7 +155,7 @@ GET : http://127.0.0.1:8000/customer/'ID-du-client'
 ````
 PUT : http://127.0.0.1:8000/customer/'ID-du-client'
 ````
-* Permet de modifier les informations d'un client. Les informations requise :
+* Permet de modifier les informations d'un client. Les informations requises :
   * first_name : Le prénom du client.
   * last_name : Le nom du client.
   * email : L'email du client.
@@ -176,7 +176,7 @@ DEL : http://127.0.0.1:8000/customer/'ID-du-client'
 ````
 POST : http://127.0.0.1:8000/contract/
 ````
-* Permet de créer un contract qui lie un client à un futur événement. Les informations requise :
+* Permet de créer un contract qui lie un client à un futur événement. Les informations requises :
   * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
   * customer : L'ID (l'identifiant) du client pour qui est créer le contract.
   * status : Le Contract est t'il signé si oui "True", si il ne l'est pas "False".
@@ -203,7 +203,7 @@ GET : http://127.0.0.1:8000/contract/"ID-du-contract"
 ````
 PUT : http://127.0.0.1:8000/contract/"ID-du-contract"
 ````
-* Permet de modifier un contract. Les informations requise :
+* Permet de modifier un contract. Les informations requises :
   * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
   * customer : L'ID (l'identifiant) du client pour qui est créer le contract.
   * status : Le Contract est t'il signé si oui "True", si il ne l'est pas "False".
