@@ -88,7 +88,7 @@ POST : http://127.0.0.1:8000/staff/
 ````
 * Permet de créer un membre de l'équipe d'Epic Event. Les informations requises :
   * username : Le nom d'utilisateur.
-  * email : L'email de l'utilisateur (il doit petre unique).
+  * email : L'email de l'utilisateur (il doit etre unique).
   * password : Le mot de passe.
   * role : Le role du collaborateur il peut être, "sales team", "support team" ou "management team".
 * Autorisation : Seul un membre de l'équipe de management peut créer un collaborateur.
