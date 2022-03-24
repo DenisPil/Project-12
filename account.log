@@ -34,3 +34,151 @@
 2022-03-09 17:58:36,404:DEBUG:customer.views:http method: POST status code: 406
 2022-03-09 17:59:54,722:DEBUG:customer.views:current user is: salesteam2
 2022-03-09 17:59:54,723:DEBUG:customer.views:http method: POST status code: 406, Staff is not from sales team
+2022-03-14 10:20:03,178:DEBUG:staff.views:current user is: admin.
+2022-03-14 10:20:03,178:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-14 10:21:05,533:DEBUG:staff.views:current user is: salesteam9.
+2022-03-14 10:21:05,533:DEBUG:staff.views:http method: GET status code: 200.
+2022-03-14 10:24:57,478:DEBUG:staff.views:current user is: managementteam.
+2022-03-14 10:24:57,478:DEBUG:staff.views:http method: PUT status code: 200.
+2022-03-14 10:24:57,486:DEBUG:staff.views:current user is: managementteam.
+2022-03-14 10:24:57,486:DEBUG:staff.views:http method: PUT status code: 202.
+2022-03-14 10:26:10,961:DEBUG:customer.views:current user is: managementteam
+2022-03-14 10:26:10,961:DEBUG:customer.views:http method: GET status code: 200.
+2022-03-14 10:28:03,108:DEBUG:customer.views:current user is: salesteam2
+2022-03-14 10:28:03,108:DEBUG:customer.views:http method: PUT status code: 200.
+2022-03-14 10:28:03,116:DEBUG:customer.views:current user is: salesteam2
+2022-03-14 10:28:03,117:DEBUG:customer.views:http method: PUT status code: 202.
+2022-03-14 14:18:16,475:DEBUG:staff.views:current user is: admin.
+2022-03-14 14:18:16,475:DEBUG:staff.views:http method: GET status code: 200.
+2022-03-14 14:18:22,023:DEBUG:staff.views:current user is: admin.
+2022-03-14 14:18:22,023:DEBUG:staff.views:http method: GET status code: 200.
+2022-03-14 14:18:27,580:DEBUG:staff.views:current user is: admin.
+2022-03-14 14:18:27,580:DEBUG:staff.views:http method: GET status code: 200.
+2022-03-14 14:39:20,817:DEBUG:contract.views:Current user is: salesteam9.
+2022-03-14 14:39:20,818:DEBUG:contract.views:Http method: GET status code: 200.
+2022-03-14 14:39:26,466:DEBUG:contract.views:Current user is: salesteam9.
+2022-03-14 14:39:26,466:DEBUG:contract.views:Http method: GET status code: 200.
+2022-03-24 14:10:15,399:DEBUG:staff.views:current user is: managementteam.
+2022-03-24 14:10:15,400:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 14:10:29,249:DEBUG:staff.views:current user is: managementteam.
+2022-03-24 14:10:29,249:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 14:10:45,256:DEBUG:staff.views:current user is: managementteam.
+2022-03-24 14:10:45,256:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 14:11:32,848:DEBUG:staff.views:current user is: managementteam.
+2022-03-24 14:11:32,849:DEBUG:staff.views:http method: GET status code: 200.
+2022-03-24 14:14:29,208:DEBUG:customer.views:current user is: vendeur.
+2022-03-24 14:14:29,209:DEBUG:customer.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 14:15:11,805:DEBUG:contract.views:current user is: vendeur
+2022-03-24 14:15:11,805:DEBUG:contract.views:http method: POST status code: 201, Successfully registered a new contract.
+2022-03-24 14:17:41,904:DEBUG:event.views:current user is: vendeur.
+2022-03-24 14:17:41,904:DEBUG:event.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 14:24:07,809:DEBUG:staff.views:current user is: vendeur.
+2022-03-24 14:24:07,809:DEBUG:staff.views:http method: GET status code: 200.
+2022-03-24 14:25:00,098:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:25:00,098:DEBUG:customer.views:http method: GET status code: 200.
+2022-03-24 14:28:48,755:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:28:48,755:DEBUG:customer.views:http method: PUT status code: 200.
+2022-03-24 14:28:48,764:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:28:48,764:DEBUG:customer.views:http method: PUT status code: 202.
+2022-03-24 14:29:18,834:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:29:18,834:DEBUG:customer.views:http method: PUT status code: 200.
+2022-03-24 14:29:18,842:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:29:18,842:DEBUG:customer.views:http method: PUT status code: 202.
+2022-03-24 14:29:21,477:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:29:21,477:DEBUG:customer.views:http method: PUT status code: 200.
+2022-03-24 14:29:21,488:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:29:21,488:DEBUG:customer.views:http method: PUT status code: 202.
+2022-03-24 14:32:21,147:DEBUG:event.views:current user is: vendeur.
+2022-03-24 14:32:21,147:DEBUG:event.views:http method: GET status code: 200.
+2022-03-24 14:33:38,318:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 14:33:38,318:DEBUG:contract.views:Http method: PUT status code: 200.
+2022-03-24 14:33:38,327:DEBUG:contract.views:current user is: vendeur
+2022-03-24 14:33:38,327:DEBUG:contract.views:http method: PUT status code: 202
+2022-03-24 14:34:22,009:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 14:34:22,009:DEBUG:contract.views:Http method: PUT status code: 200.
+2022-03-24 14:34:22,017:DEBUG:contract.views:current user is: vendeur
+2022-03-24 14:34:22,017:DEBUG:contract.views:http method: PUT status code: 202
+2022-03-24 14:34:24,768:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 14:34:24,768:DEBUG:contract.views:Http method: PUT status code: 200.
+2022-03-24 14:34:24,776:DEBUG:contract.views:current user is: vendeur
+2022-03-24 14:34:24,776:DEBUG:contract.views:http method: PUT status code: 202
+2022-03-24 14:35:02,429:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 14:35:02,430:DEBUG:contract.views:Http method: PUT status code: 200.
+2022-03-24 14:35:02,437:DEBUG:contract.views:current user is: vendeur
+2022-03-24 14:35:02,437:DEBUG:contract.views:http method: PUT status code: 202
+2022-03-24 14:36:04,777:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 14:36:04,777:DEBUG:contract.views:Http method: PUT status code: 200.
+2022-03-24 14:36:04,783:DEBUG:contract.views:current user is: vendeur
+2022-03-24 14:36:04,784:DEBUG:contract.views:http method: PUT status code: 202
+2022-03-24 14:40:26,546:DEBUG:customer.views:current user is: vendeur.
+2022-03-24 14:40:26,546:DEBUG:customer.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 14:40:56,358:DEBUG:customer.views:current user is: vendeur
+2022-03-24 14:40:56,358:DEBUG:customer.views:http method: GET status code: 200.
+2022-03-24 14:49:31,247:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 14:49:31,247:DEBUG:contract.views:Http method: GET status code: 200.
+2022-03-24 14:55:22,222:DEBUG:contract.views:current user is: vendeur
+2022-03-24 14:55:22,222:DEBUG:contract.views:http method: POST status code: 201, Successfully registered a new contract.
+2022-03-24 15:00:21,941:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 15:00:21,941:DEBUG:contract.views:Http method: PUT status code: 200.
+2022-03-24 15:00:21,948:DEBUG:contract.views:current user is: vendeur
+2022-03-24 15:00:21,948:DEBUG:contract.views:http method: PUT status code: 202
+2022-03-24 15:03:30,421:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 15:03:30,421:DEBUG:contract.views:Http method: GET status code: 200.
+2022-03-24 15:04:19,628:DEBUG:customer.views:current user is: support
+2022-03-24 15:04:19,628:DEBUG:customer.views:http method: GET status code: 200.
+2022-03-24 15:14:07,340:DEBUG:staff.views:current user is: vendeur.
+2022-03-24 15:14:07,340:DEBUG:staff.views:http method: GET status code: 200.
+2022-03-24 15:14:35,112:DEBUG:staff.views:current user is: managementteam.
+2022-03-24 15:14:35,112:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 15:14:56,820:DEBUG:customer.views:current user is: vendeur
+2022-03-24 15:14:56,820:DEBUG:customer.views:http method: GET status code: 200.
+2022-03-24 15:15:00,597:DEBUG:customer.views:current user is: support
+2022-03-24 15:15:00,598:DEBUG:customer.views:http method: GET status code: 200.
+2022-03-24 15:15:15,395:DEBUG:customer.views:current user is: vendeur.
+2022-03-24 15:15:15,396:DEBUG:customer.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 15:15:25,977:DEBUG:customer.views:current user is: vendeur
+2022-03-24 15:15:25,977:DEBUG:customer.views:http method: PUT status code: 200.
+2022-03-24 15:15:25,987:DEBUG:customer.views:current user is: vendeur
+2022-03-24 15:15:25,987:DEBUG:customer.views:http method: PUT status code: 202.
+2022-03-24 15:16:16,218:DEBUG:contract.views:Current user is: vendeur.
+2022-03-24 15:16:16,218:DEBUG:contract.views:Http method: PUT status code: 200.
+2022-03-24 15:16:16,226:DEBUG:contract.views:current user is: vendeur
+2022-03-24 15:16:16,226:DEBUG:contract.views:http method: PUT status code: 202
+2022-03-24 15:21:14,822:DEBUG:event.views:current user is: vendeur.
+2022-03-24 15:21:14,822:DEBUG:event.views:http method: POST status code: 406, This contract is already linked to an event..
+2022-03-24 15:23:43,894:DEBUG:event.views:current user is: support.
+2022-03-24 15:23:43,895:DEBUG:event.views:http method: PUT status code: 200.
+2022-03-24 15:23:43,903:DEBUG:event.views:current user is: support.
+2022-03-24 15:23:43,903:DEBUG:event.views:http method: PUT status code: 202.
+2022-03-24 15:24:27,350:DEBUG:contract.views:Current user is: support.
+2022-03-24 15:24:27,351:DEBUG:contract.views:Http method: GET status code: 200.
+2022-03-24 15:24:32,553:DEBUG:contract.views:Current user is: support.
+2022-03-24 15:24:32,553:DEBUG:contract.views:Http method: GET status code: 200.
+2022-03-24 15:25:55,999:DEBUG:event.views:current user is: support.
+2022-03-24 15:25:55,999:DEBUG:event.views:http method: PUT status code: 200.
+2022-03-24 15:25:56,007:DEBUG:event.views:current user is: support.
+2022-03-24 15:25:56,007:DEBUG:event.views:http method: PUT status code: 202.
+2022-03-24 15:45:27,603:DEBUG:staff.views:current user is: management.
+2022-03-24 15:45:27,603:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 15:46:47,741:DEBUG:staff.views:current user is: management.
+2022-03-24 15:46:47,741:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 15:48:07,244:DEBUG:staff.views:current user is: management.
+2022-03-24 15:48:07,245:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 15:57:09,385:DEBUG:staff.views:current user is: management.
+2022-03-24 15:57:09,385:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 15:58:57,794:DEBUG:staff.views:current user is: management.
+2022-03-24 15:58:57,794:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 16:02:21,001:DEBUG:staff.views:current user is: management.
+2022-03-24 16:02:21,001:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 16:47:57,334:DEBUG:staff.views:current user is: ad.
+2022-03-24 16:47:57,334:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 16:49:43,400:DEBUG:staff.views:current user is: ad.
+2022-03-24 16:49:43,400:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 16:55:37,687:DEBUG:staff.views:current user is: ad.
+2022-03-24 16:55:37,688:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 16:58:17,876:DEBUG:staff.views:current user is: ad.
+2022-03-24 16:58:17,876:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 17:00:16,970:DEBUG:staff.views:current user is: ad.
+2022-03-24 17:00:16,970:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..
+2022-03-24 17:02:44,967:DEBUG:staff.views:current user is: ad.
+2022-03-24 17:02:44,968:DEBUG:staff.views:http method: POST status code: 201, Successfully registered a new user..

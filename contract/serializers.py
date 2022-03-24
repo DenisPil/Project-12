@@ -8,7 +8,8 @@ class CreateContractSerializer(serializers.ModelSerializer):
         model = Contract
         fields = ['customer',
                   'sales_contact',
-                  'amount']
+                  'amount',
+                  'status']
 
 class ContractDetailSerializer(serializers.ModelSerializer):
     class Meta:
