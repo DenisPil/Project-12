@@ -163,14 +163,13 @@ PUT : http://127.0.0.1:8000/customer/'ID-du-client'
   * mobile : Le numéro de mobile du client.
   * company_name : Le nom de l'entreprise du client.
   * sales_contact : L'ID (l'identifiant) d'un membre de l'équipe de vente d'Epic Event, il sera en charge du client.
-* Permet de supprimer un un membre de l'équipe d'Epic Event.
-* Authorisation : L'équipe de vente, l'équipe de management peuvent modifier les informations d'un client.
+* Authorisation : Le vendeur lié au client l'équipe de management peuvent modifier les informations un client.
 
 ````
 DEL : http://127.0.0.1:8000/customer/'ID-du-client'
 ````
 * Permet de supprimer un client de la base de données.
-* Authorisation : L'équipe de vente, l'équipe de management peuvent supprimé d'un client.
+* Authorisation : Le vendeur lié au client l'équipe de management peuvent supprimé un client.
 
 #### CONTRACT
 ````
@@ -181,14 +180,14 @@ POST : http://127.0.0.1:8000/contract/
   * customer : L'ID (l'identifiant) du client pour qui est créer le contract.
   * status : Le Contract est t'il signé si oui "True", si il ne l'est pas "False".
   * amount : Le prix de l'événement.
-* Authorisation : L'équipe de vente, l'équipe de management peuvent supprimé un contract.
+* Authorisation : L'équipe de vente, l'équipe de management peuvent ajouter un contract.
 
 ````
 GET : http://127.0.0.1:8000/contract/
 ````
 * Permet de visualiser la liste de tous les contracts.
 * Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
-* Filtre : il est possible de filtrer les contract à partir du nom du client qui est lié au contract, l'email du client qui est lié au contract, la date du contract ou le montant du contract :
+* Filtre : il est possible de filtrer les contracts à partir du nom du client qui est lié au contract, l'email du client qui est lié au contract, la date du contract ou le montant du contract :
   * ````http://127.0.0.1:8000/contract/?name="nom du client"````
   * ````http://127.0.0.1:8000/contract/?email="email du client"````
   * ````http://127.0.0.1:8000/contract/?date contract="la date du contract"````
@@ -208,13 +207,13 @@ PUT : http://127.0.0.1:8000/contract/"ID-du-contract"
   * customer : L'ID (l'identifiant) du client pour qui est créer le contract.
   * status : Le Contract est t'il signé si oui "True", si il ne l'est pas "False".
   * amount : Le prix de l'événement.
-* Authorisation : L'équipe de vente et l'équipe de management peuvent créer un contract.
+* Authorisation : Le vendeur lié au contract et l'équipe de management peuvent modifier un contract.
 
 ````
 DEL : http://127.0.0.1:8000/contract/"ID-du-contract"
 ````
 * Permet de supprimer un contract.
-* Authorisation : L'équipe de vente, l'équipe support et l'équipe de management.
+* Authorisation : Le vendeur lié au contract l'équipe de management.
 
 #### EVENT
 ````
@@ -254,10 +253,10 @@ PUT : http://127.0.0.1:8000/event/"ID-d'un-événement"
   * commentary : Un commentaire sur l'événement (informations diverse sur l'événement).
   * support_contact : L'ID (l'identifiant) d'un membre de l'équipe de support qui aura en charge l'événement.
   * event_status : Les status : 'paiement en cours', 'payé', 'événement à venir', 'événement en cours', 'événement terminé'.
-* Authorisation : L'équipe de vente et l'équipe de management peuvent modifier un événement.
+* Authorisation : Le support technique lié à l'event et l'équipe de management peuvent modifier un événement.
 
 ````
 DEL : http://127.0.0.1:8000/event/"ID-d'un-événement"
 ````
 * Permet de supprimer un événement.
-* Authorisation : L'équipe de vente, l'équipe support peuvent supprimer un événement.
+* Authorisation : Le support technique lié à l'event et l'équipe de management peuvent supprimer un événement.
